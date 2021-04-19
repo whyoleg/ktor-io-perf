@@ -13,6 +13,11 @@ tasks.whenTaskAdded {
     if (name.endsWith("test", ignoreCase = true)) onlyIf { !rootProject.hasProperty("skipTests") }
 }
 
+val ktorVersion: String? by project
+
+val ktorVersionFixed = ktorVersion ?: "1.5.3"
+println("use ktor version: $ktorVersionFixed")
+
 kotlin {
     jvm("jvmOld")
     jvm("jvmIr") {
@@ -65,7 +70,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-io:1.5.3")
+                implementation("io.ktor:ktor-io:$ktorVersionFixed")
             }
         }
         val commonTest by getting {
